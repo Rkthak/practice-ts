@@ -1,18 +1,20 @@
 import { useState } from "react";
 
 const Counter = () => {
-  const [like, setLike] = useState<number>(0);
-  const [disLike, setDisLike] = useState<number>(0);
+  const [reactions, setReactions] = useState({
+    like: 0,
+    disLike: 0,
+  });
   const handelLike = () => {
-    setLike(like + 1);
+    setReactions({ ...reactions, like: reactions.like + 1 });
   };
   const handelDisLike = () => {
-    setDisLike(disLike + 1);
+    setReactions({ ...reactions, disLike: reactions.disLike + 1 });
   };
   return (
     <div>
-      <button onClick={handelLike}>👍 {like} </button> &nbsp;
-      <button onClick={handelDisLike}>👎 {disLike} </button>
+      <button onClick={handelLike}>👍 {reactions.like} </button> &nbsp;
+      <button onClick={handelDisLike}>👎 {reactions.disLike} </button>
     </div>
   );
 };
