@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Counter = () => {
-  const [loginMessage, setLogginMessage] = useState("");
+  const [loginMessage, setLogginMessage] = useState<React.ReactNode>(null);
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -16,17 +16,25 @@ const Counter = () => {
     .split("@")[0]
     .replace(input.email.charAt(0), input.email.charAt(0).toUpperCase());
 
-  const message: string = `Welcome 🙋! Logged as  ${userName}`;
   const handleFormSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLogginMessage(message);
+
+    setLogginMessage(
+      <span className="text-gray-500">
+        Welcome 🙋! Logged as{" "}
+        <span className="text-green-500 font-bold">{userName}</span>
+      </span>,
+    );
   };
 
   return (
-    <div>
-      <h1>🟢 Login</h1> <span> {loginMessage} </span> <br />
-      <br />
-      <form onSubmit={handleFormSubmit}>
+    <div className="container p-4 m-auto">
+      <h1 className="text-green-700 text-2xl font-bold mb-2">🟢 Login</h1>{" "}
+      {loginMessage}
+      <form
+        onSubmit={handleFormSubmit}
+        className="border-2 p-4 border-gray-400 rounded mt-3"
+      >
         <input
           type="email"
           name="email"
@@ -35,9 +43,8 @@ const Counter = () => {
           value={input.email}
           onChange={handleInputChange}
           required
+          className="p-2 border-2 w-full rounded mb-5 text-gray-500 font-medium focus:border-green-500 outline-none"
         />
-        <br />
-        <br />
         <input
           type="password"
           name="password"
@@ -46,10 +53,12 @@ const Counter = () => {
           value={input.password}
           onChange={handleInputChange}
           required
+          className="p-2 border-2 w-full rounded mb-8 text-gray-500 font-medium focus:border-green-500 outline-none"
         />
-        <br />
-        <br />
-        <button>Login</button>
+
+        <button className="bg-green-700 py-1 px-8 rounded cursor-pointer text-white font-semibold">
+          Login
+        </button>
       </form>
     </div>
   );
