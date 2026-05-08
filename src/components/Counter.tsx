@@ -1,23 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Counter = () => {
-  const [input, setInput] = useState("");
-  const handleFormSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(input);
+  const [like, setLike] = useState<number>(0);
+  const [disLike, setDisLike] = useState<number>(0);
+  const handelLike = () => {
+    setLike(like + 1);
   };
-
+  const handelDisLike = () => {
+    setDisLike(disLike + 1);
+  };
   return (
     <div>
-      <form onSubmit={handleFormSubmit}>
-        <input
-          type="text"
-          placeholder="enter your name"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button>Print</button>
-      </form>
+      <button onClick={handelLike}>👍 {like} </button> &nbsp;
+      <button onClick={handelDisLike}>👎 {disLike} </button>
     </div>
   );
 };
